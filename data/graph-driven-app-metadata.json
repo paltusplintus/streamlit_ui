@@ -1,0 +1,334 @@
+{
+  "style": {
+    "font-family": "sans-serif",
+    "background-color": "#ffffff",
+    "background-image": "",
+    "background-size": "100%",
+    "node-color": "#ffffff",
+    "border-width": 4,
+    "border-color": "#000000",
+    "radius": 50,
+    "node-padding": 5,
+    "node-margin": 2,
+    "outside-position": "auto",
+    "node-icon-image": "",
+    "node-background-image": "",
+    "icon-position": "inside",
+    "icon-size": 64,
+    "caption-position": "inside",
+    "caption-max-width": 200,
+    "caption-color": "#000000",
+    "caption-font-size": 50,
+    "caption-font-weight": "normal",
+    "label-position": "inside",
+    "label-display": "pill",
+    "label-color": "#000000",
+    "label-background-color": "#ffffff",
+    "label-border-color": "#000000",
+    "label-border-width": 4,
+    "label-font-size": 40,
+    "label-padding": 5,
+    "label-margin": 4,
+    "directionality": "directed",
+    "detail-position": "inline",
+    "detail-orientation": "parallel",
+    "arrow-width": 5,
+    "arrow-color": "#000000",
+    "margin-start": 5,
+    "margin-end": 5,
+    "margin-peer": 20,
+    "attachment-start": "normal",
+    "attachment-end": "normal",
+    "relationship-icon-image": "",
+    "type-color": "#000000",
+    "type-background-color": "#ffffff",
+    "type-border-color": "#000000",
+    "type-border-width": 0,
+    "type-font-size": 16,
+    "type-padding": 5,
+    "property-position": "outside",
+    "property-alignment": "colon",
+    "property-color": "#000000",
+    "property-font-size": 16,
+    "property-font-weight": "normal"
+  },
+  "nodes": [
+    {
+      "id": "n0",
+      "position": {
+        "x": 272.3709910872653,
+        "y": 50
+      },
+      "caption": "",
+      "labels": [
+        "App"
+      ],
+      "properties": {
+        "id": "my_app1"
+      },
+      "style": {}
+    },
+    {
+      "id": "n1",
+      "position": {
+        "x": 272.37099108726534,
+        "y": 355.4574272997725
+      },
+      "caption": "",
+      "labels": [
+        "Screen"
+      ],
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n2",
+      "position": {
+        "x": 497.11247533444623,
+        "y": 355.4574272997725
+      },
+      "caption": "",
+      "labels": [
+        "Widget"
+      ],
+      "properties": {
+        "label": "Enter your name:",
+        "type": "Text"
+      },
+      "style": {}
+    },
+    {
+      "id": "n3",
+      "position": {
+        "x": 721.8539595816271,
+        "y": 355.45742729977246
+      },
+      "caption": "",
+      "labels": [
+        "Widget"
+      ],
+      "properties": {
+        "id": "input1",
+        "type": "Input"
+      },
+      "style": {}
+    },
+    {
+      "id": "n4",
+      "position": {
+        "x": 272.3709910872653,
+        "y": 601.6991646729668
+      },
+      "caption": "",
+      "labels": [
+        "Condition"
+      ],
+      "properties": {
+        "query": "MATCH (n:Name) RETURN n.name starts with 'A'",
+        "params": ""
+      },
+      "style": {}
+    },
+    {
+      "id": "n5",
+      "position": {
+        "x": 948.5182902954191,
+        "y": 355.45742729977246
+      },
+      "caption": "",
+      "labels": [
+        "Widget"
+      ],
+      "properties": {
+        "label": "Ok",
+        "type": "Button"
+      },
+      "style": {}
+    },
+    {
+      "id": "n6",
+      "position": {
+        "x": 749.4551972696052,
+        "y": 156.39433427395852
+      },
+      "caption": "",
+      "labels": [
+        "Action"
+      ],
+      "properties": {
+        "type": "query",
+        "query": "MERGE (n:Name{name:$input1})"
+      },
+      "style": {}
+    },
+    {
+      "id": "n7",
+      "position": {
+        "x": 75,
+        "y": 1005.3301209590488
+      },
+      "caption": "",
+      "labels": [
+        "Screen"
+      ],
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n8",
+      "position": {
+        "x": 75,
+        "y": 748.9393938965043
+      },
+      "caption": "",
+      "labels": [
+        "Screen"
+      ],
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n9",
+      "position": {
+        "x": 497.11247533444623,
+        "y": 748.9393938965043
+      },
+      "caption": "",
+      "labels": [
+        "Widget"
+      ],
+      "properties": {
+        "label": "Hi $name !",
+        "query": "MATCH (n:Name) RETURN n.name as name",
+        "type": "Text"
+      },
+      "style": {}
+    },
+    {
+      "id": "n10",
+      "position": {
+        "x": 1084.6482660780398,
+        "y": 156.39433427395852
+      },
+      "caption": "",
+      "labels": [
+        "Action"
+      ],
+      "properties": {
+        "type": "next screen"
+      },
+      "style": {}
+    },
+    {
+      "id": "n11",
+      "position": {
+        "x": 497.11247533444623,
+        "y": 1005.3301209590488
+      },
+      "caption": "",
+      "labels": [
+        "Widget"
+      ],
+      "properties": {
+        "label": "Hi $name ! I like you.",
+        "query": "MATCH (n:Name) RETURN n.name as name",
+        "type": "text"
+      },
+      "style": {}
+    }
+  ],
+  "relationships": [
+    {
+      "id": "n0",
+      "fromId": "n0",
+      "toId": "n1",
+      "type": "APP_START",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n1",
+      "fromId": "n1",
+      "toId": "n2",
+      "type": "START",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n2",
+      "fromId": "n2",
+      "toId": "n3",
+      "type": "NEXT",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n3",
+      "fromId": "n1",
+      "toId": "n4",
+      "type": "NEXT",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n4",
+      "fromId": "n3",
+      "toId": "n5",
+      "type": "NEXT",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n5",
+      "fromId": "n5",
+      "toId": "n6",
+      "type": "ACTION",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n6",
+      "fromId": "n4",
+      "toId": "n7",
+      "type": "NEXT",
+      "properties": {
+        "result": "True"
+      },
+      "style": {}
+    },
+    {
+      "id": "n7",
+      "fromId": "n4",
+      "toId": "n8",
+      "type": "NEXT",
+      "properties": {
+        "result": "False"
+      },
+      "style": {}
+    },
+    {
+      "id": "n8",
+      "fromId": "n8",
+      "toId": "n9",
+      "type": "START",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n9",
+      "fromId": "n6",
+      "toId": "n10",
+      "type": "NEXT",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n10",
+      "fromId": "n7",
+      "toId": "n11",
+      "type": "START",
+      "properties": {},
+      "style": {}
+    }
+  ]
+}
