@@ -12,7 +12,6 @@ neo.clean_slate()
 f = open(APP_JSON, "r")
 neo.load_arrows_dict(json.load(f))
 
-
 class App:
     def __init__(self, interface: NeoInterface):
         self.interface = interface

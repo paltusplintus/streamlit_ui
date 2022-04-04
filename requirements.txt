@@ -1,2 +1,3 @@
+jsonlines
 neointerface
 streamlit==1.8.1

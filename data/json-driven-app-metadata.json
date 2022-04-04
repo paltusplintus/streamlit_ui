@@ -1,0 +1,55 @@
+{
+  "_type": "App",
+  "id": "my_app1",
+  "Screen": [
+    {
+      "_type": "Screen",
+      "Widget": [
+        {
+          "_type": "Widget",
+          "label": "Enter your name:",
+          "type": "Text"
+		},
+		{
+		  "_type": "Widget",
+		  "id": "input1",
+		  "type": "Input"
+		},
+		{
+		  "_type": "Widget",
+		  "label": "Ok",
+		  "type": "Button",
+		  "Action": [
+			{
+			  "_type": "Action",
+			  "_id": 20,
+			  "type": "set_param",
+			  "set_param": {"name": "Mr. $input1"}
+			},
+			{
+			  "_type": "Action",
+			  "_id": 2,
+			  "type": "next screen"
+			},
+			  {
+			  "_type": "Action",
+			  "_id": 3,
+			  "save_params": ["name"],
+			  "type": "save_params"
+			}
+		  ]
+		}
+	  ]
+    },
+	{
+	  "_type": "Screen",
+	  "Widget": [
+		{
+		  "_type": "Widget",
+		  "label": "Hi $name !",
+		  "type": "Text"
+		}
+	  ]
+    }
+  ]
+}
