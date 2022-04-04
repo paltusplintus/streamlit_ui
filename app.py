@@ -30,10 +30,19 @@ def fetch_metadata(interface: NeoInterface, label: str, where: dict = None):
 
 app_meta = fetch_metadata(neo, "App", {"id": APP})
 
-widgets_dict_by_ord = {}
-widgets_dict_by_id = {}
-actions_dct = {}
+app_params = {}
 screen = st.empty()
+
+def process_query(meta:dict):
+    if meta.get("type") == "query":
+        q = meta.get("query")
+        if meta.get("params"):
+            params = json.loads(meta.get("params"))
+        else:
+            params = {}
+        params = {**params,
+                  **{id: widget for id, widget in app_params.items()}}
+        return neo.query(q, params)
 
 def render(ord: int):
     for i, app_meta_item in enumerate(app_meta):
@@ -42,32 +51,20 @@ def render(ord: int):
             with screen.container():
                 for j, widget_meta in enumerate(screen_meta):
                     if widget_meta.get("type") == "Text":
-                        widgets_dict_by_ord[i * 1000 + j] = st.write(widget_meta.get("label"), key=(i * 1000 + j))
-                        if widget_meta.get("id"):
-                            widgets_dict_by_id[widget_meta.get("id")] = widgets_dict_by_ord[i * 1000 + j]
+                        widget = st.write(widget_meta.get("label"), key=(i * 1000 + j))
                     elif widget_meta.get("type") == "Input":
-                        widgets_dict_by_ord[i * 1000 + j] = st.text_input(label="", value="", help=None, key=(i * 1000 + j))
-                        if widget_meta.get("id"):
-                            widgets_dict_by_id[widget_meta.get("id")] = widgets_dict_by_ord[i * 1000 + j]
+                        widget = st.text_input(label="", value="", help=None, key=(i * 1000 + j))
                     elif widget_meta.get("type") == "Button":
-                        widgets_dict_by_ord[i * 1000 + j] = st.button(label=widget_meta.get("label"), key=(i * 1000 + j))
-                        if widget_meta.get("id"):
-                            widgets_dict_by_id[widget_meta.get("id")] = widgets_dict_by_ord[i * 1000 + j]
-                        actions_dct[i * 1000 + j] = fetch_metadata(neo, "Widget", {"node_id": widget_meta['node_id']})
-                        if widgets_dict_by_ord[i * 1000 + j]:
-                            for action in actions_dct[i * 1000 + j]:
-                                if action.get("type") == "query":
-                                    q = action.get("query")
-                                    if action.get("params"):
-                                        params = json.loads(action.get("params"))
-                                    else:
-                                        params = {}
-                                    params = {**params,
-                                              **{id: widget for id, widget in widgets_dict_by_id.items()}}
-                                    res = neo.query(q, params)
-                                elif action.get("type") == "next screen":
+                        widget = st.button(label=widget_meta.get("label"), key=(i * 1000 + j))
+                        actions = fetch_metadata(neo, "Widget", {"node_id": widget_meta['node_id']})
+                        if widget:
+                            for action in actions:
+                                res = process_query(action)
+                                if action.get("type") == "next screen":
                                     st.session_state.active_screen += 1
                                     render(st.session_state.active_screen)
+                    if widget_meta.get("id"):
+                        app_params[widget_meta.get("id")] = widget
                 break
         else:
             screen.empty()
