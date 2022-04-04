@@ -12,7 +12,7 @@ APP_JSON = Path("data") / Path("json-driven-app-metadata.json")
 
 class App:
     def __init__(self, metadata_path: Path,
-                 save_path: str = Path("..") / Path("..") / Path("artifacts") / Path("streamlit_app")):
+                 save_path: str = Path("..") / Path("artifacts") / Path("streamlit_app")):
         self.metadata_path = metadata_path
         self.save_path = save_path
         self.save_path.mkdir(parents=True, exist_ok=True)
